@@ -1,0 +1,1 @@
+insert into Produto(id, nome, preco, descricao) values(1, "Kindle", 499.00, "Conheça o novo Kindle, leia a qualquer hora do dia.");
