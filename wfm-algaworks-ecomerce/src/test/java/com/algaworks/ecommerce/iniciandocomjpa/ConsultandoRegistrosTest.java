@@ -48,8 +48,8 @@ public class ConsultandoRegistrosTest {
 
         produto.setNome("Microfone");
 
+        Assertions.assertEquals("Microfone", produto.getNome());
         entityManager.refresh(produto);
-
         Assertions.assertEquals("Kindle", produto.getNome());
     }
 }
