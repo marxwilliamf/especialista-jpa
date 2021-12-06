@@ -1,5 +1,6 @@
 package com.algaworks.ecommerce.iniciandocomjpa;
 
+import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Produto;
 import org.junit.jupiter.api.*;
 
@@ -7,31 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class ConsultandoRegistrosTest {
-
-    private static EntityManagerFactory entityManagerFactory;
-
-    private EntityManager entityManager;
-
-    @BeforeAll
-    public static void setUpBeforeClass() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("Ecommerce-PU");
-    }
-
-    @AfterAll
-    public static void tearDownAfterClass() {
-        entityManagerFactory.close();
-    }
-
-    @BeforeEach
-    public void setUp() {
-        entityManager = entityManagerFactory.createEntityManager();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        entityManager.close();
-    }
+public class ConsultandoRegistrosTest extends EntityManagerTest {
 
     @Test
     public void buscaPorIdentificador() {
