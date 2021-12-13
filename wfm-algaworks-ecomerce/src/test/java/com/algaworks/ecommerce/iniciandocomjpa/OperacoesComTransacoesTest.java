@@ -11,6 +11,33 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
 
 
     @Test
+    public void removerObjeto() {
+//        Produto produto = new Produto();    //objeto não mapeado pelo JPA
+//        produto.setId(3);   //gera o erro: java.lang.IllegalArgumentException: Removing a detached instance com.algaworks.ecommerce.model.Produto#3
+
+//        Produto produto = new Produto();    //objeto não mapeado pelo JPA
+//        produto.setId(300);   // Não gera erro pois ele não encontra o objeto no select que o JPA faz
+
+        Produto produto = entityManager.find(Produto.class, 3);
+
+//        entityManager.remove(produto);  // Não precisa estar dentro de uma transação, ele aguarda a próxima;
+//        entityManager.getTransaction().begin();
+//
+//        entityManager.getTransaction().commit();
+
+        entityManager.getTransaction().begin();
+        entityManager.remove(produto);
+        entityManager.getTransaction().commit();
+
+//        entityManager.clear(); // não precisa limpar a memória para fazer a asserção por que após o remove ele é retirado da memória
+
+        Produto produtoVerificação = entityManager.find(Produto.class, 3);
+        Assertions.assertNull(produtoVerificação);
+
+
+    }
+
+    @Test
     public void inserirOPrimeiroObjeto(){
         Produto produto = new Produto();
 
