@@ -10,6 +10,24 @@ import java.math.BigDecimal;
 public class OperacoesComTransacoesTest extends EntityManagerTest {
 
     @Test
+    public void atualizaObjetoGerenciado() {
+        Produto produto = entityManager.find(Produto.class, 1);
+
+        //produto.setNome("Kindle Paperwhite  2ª Geração"); //pode inclusive ficar fora da transação, esperando por uma.
+        //não precisa setar descrição e preço pois foi buscado objeto produto na meméria
+
+        entityManager.getTransaction().begin();
+        produto.setNome("Kindle Paperwhite 2ª Geração");
+        entityManager.getTransaction().commit();
+
+        entityManager.clear(); // precisa limpar a memória para fazer a asserção por que o objeto ainda estará na memória
+
+        Produto produtoVerificação = entityManager.find(Produto.class, 1);
+        Assertions.assertEquals("Kindle Paperwhite 2ª Geração", produtoVerificação.getNome());
+
+    }
+
+    @Test
     public void atualizaObjeto() {
         Produto produto = new Produto();
 
