@@ -9,6 +9,26 @@ import java.math.BigDecimal;
 
 public class OperacoesComTransacoesTest extends EntityManagerTest {
 
+    @Test
+    public void atualizaObjeto() {
+        Produto produto = new Produto();
+
+        produto.setId(1);
+        produto.setNome("Kindle Paperwhite");
+        produto.setDescricao("Conheça o novo Kindle"); //caso não descreva uma caracteristica ele substitui por vazio.
+        produto.setPreco(new BigDecimal(599));
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(produto); //o merge faz uma cópia da instancia produto e essa cópia é que é gerenciada pelo entityManager
+        entityManager.getTransaction().commit();
+
+        entityManager.clear(); // precisa limpar a memória para fazer a asserção por que o objeto ainda estará na memória
+
+        Produto produtoVerificação = entityManager.find(Produto.class, 1);
+        Assertions.assertNotNull(produtoVerificação);
+        Assertions.assertEquals("Kindle Paperwhite", produtoVerificação.getNome());
+
+    }
 
     @Test
     public void removerObjeto() {
