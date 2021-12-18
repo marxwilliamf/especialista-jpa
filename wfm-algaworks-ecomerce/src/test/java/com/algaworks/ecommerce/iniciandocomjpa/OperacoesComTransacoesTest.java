@@ -10,6 +10,31 @@ import java.math.BigDecimal;
 public class OperacoesComTransacoesTest extends EntityManagerTest {
 
     @Test
+    public void inserirObjetoComMerge(){
+        Produto produto = new Produto();
+
+        produto.setId(4);
+        produto.setNome("Microfone Rode Videmic");
+        produto.setDescricao("A melhor qualidade de som.");
+        produto.setPreco(new BigDecimal(1000));
+
+        //entityManager.merge(produto); //o merge também pode ficar fora da transação aguardando por uma.
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(produto);
+        entityManager.getTransaction().commit();
+
+        entityManager.clear(); // se eu não faço esse clear ele busca na memória e não no banco de dados // com o clear ele faz mais um select
+
+        Produto produtoVerificação = entityManager.find(Produto.class, produto.getId());
+        Assertions.assertNotNull(produtoVerificação);
+        System.out.println(produtoVerificação.toString());
+
+
+    }
+
+
+    @Test
     public void atualizaObjetoGerenciado() {
         Produto produto = entityManager.find(Produto.class, 1);
 
