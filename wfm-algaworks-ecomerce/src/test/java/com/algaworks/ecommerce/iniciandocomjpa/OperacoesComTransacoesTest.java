@@ -10,6 +10,46 @@ import java.math.BigDecimal;
 public class OperacoesComTransacoesTest extends EntityManagerTest {
 
     @Test
+    public void inserirObjetoPersistMerge(){
+        Produto produtoPersist = new Produto();
+
+        produtoPersist.setId(5);
+        produtoPersist.setNome("Smartphone One Plus");
+        produtoPersist.setDescricao("O melhor processador");
+        produtoPersist.setPreco(new BigDecimal(2000));
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(produtoPersist); //só serve para persistir, não serve para atualizar, garate uma chamada de insert de um objeto novo
+        produtoPersist.setDescricao("O melhor processador da sua geração"); //como ele ja esta sendo gerenciado pelo EntityManager ele não faz select fazendo direto um update.
+
+//        entityManager.merge(produto);
+        entityManager.getTransaction().commit();
+
+        entityManager.clear(); // se eu não faço esse clear ele busca na memória e não no banco de dados // com o clear ele faz mais um select
+
+        Produto produtoVerificação = entityManager.find(Produto.class, produtoPersist.getId());
+        Assertions.assertNotNull(produtoVerificação);
+        System.out.println(produtoVerificação.toString());
+
+        Produto produtoMerge = new Produto();
+        produtoMerge.setId(6);
+        produtoMerge.setNome("Notebook Dell");
+        produtoMerge.setDescricao("O melhor da Categoria");
+        produtoMerge.setPreco(new BigDecimal(7000));
+
+//        entityManager.getTransaction().begin();
+//        entityManager.merge(produtoMerge); //merge faz uma cópia de produto para gerenciar com EntityManager
+//        produtoMerge.setNome("Notebook Dell Pro"); // nesse caso ele não vai atualizar pois não é um objeto gerenciado
+//        entityManager.getTransaction().commit();
+
+        entityManager.getTransaction().begin();
+        produtoMerge = entityManager.merge(produtoMerge); //merge faz uma cópia de produto para gerenciar com EntityManager
+        produtoMerge.setNome("Notebook Dell Pro"); // nesse caso ele vai atualizar pois o método retorna o objeto gerenciado
+        entityManager.getTransaction().commit();
+    }
+
+
+    @Test
     public void inserirObjetoComMerge(){
         Produto produto = new Produto();
 
@@ -29,8 +69,6 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
         Produto produtoVerificação = entityManager.find(Produto.class, produto.getId());
         Assertions.assertNotNull(produtoVerificação);
         System.out.println(produtoVerificação.toString());
-
-
     }
 
 
@@ -49,7 +87,6 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
 
         Produto produtoVerificação = entityManager.find(Produto.class, 1);
         Assertions.assertEquals("Kindle Paperwhite 2ª Geração", produtoVerificação.getNome());
-
     }
 
     @Test
@@ -70,7 +107,6 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
         Produto produtoVerificação = entityManager.find(Produto.class, 1);
         Assertions.assertNotNull(produtoVerificação);
         Assertions.assertEquals("Kindle Paperwhite", produtoVerificação.getNome());
-
     }
 
     @Test
@@ -96,8 +132,6 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
 
         Produto produtoVerificação = entityManager.find(Produto.class, 3);
         Assertions.assertNull(produtoVerificação);
-
-
     }
 
     @Test
@@ -124,8 +158,6 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
         Produto produtoVerificação = entityManager.find(Produto.class, produto.getId());
         Assertions.assertNotNull(produtoVerificação);
         System.out.println(produtoVerificação.toString());
-
-
     }
 
 
@@ -153,8 +185,6 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
         Produto produtoVerificação = entityManager.find(Produto.class, produto.getId());
         Assertions.assertNotNull(produtoVerificação);
         System.out.println(produtoVerificação.toString());
-
-
     }
 
     @Test
