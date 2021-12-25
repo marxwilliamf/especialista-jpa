@@ -3,17 +3,25 @@ package com.algaworks.ecommerce.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 
 @Entity
-@Table(name="produto")
-public class Produto {
+@Table(name="cliente")
+public class Cliente {
 
     @Id
     private Integer id;
     private String nome;
-    private String descricao;
-    private BigDecimal preco;
+
+    public Cliente() {}
+
+    public Cliente(Integer id) {
+        this.id = id;
+    }
+
+    public Cliente(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
     public Integer getId() {
         return id;
@@ -31,30 +39,14 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public BigDecimal getPreco() {
-        return preco;
-    }
-
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Produto produto = (Produto) o;
+        Cliente cliente = (Cliente) o;
 
-        return id.equals(produto.id);
+        return id.equals(cliente.id);
     }
 
     @Override
@@ -64,11 +56,9 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto{" +
+        return "Cliente{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", preco=" + preco +
                 '}';
     }
 }
