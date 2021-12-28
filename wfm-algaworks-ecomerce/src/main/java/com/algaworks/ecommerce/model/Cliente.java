@@ -12,7 +12,7 @@ public class Cliente {
     private Integer id;
     private String nome;
 
-    public Cliente() {}
+    public Cliente() {} //pra funcionar com o JPA precisa ter um cosntrotor vazio
 
     public Cliente(Integer id) {
         this.id = id;

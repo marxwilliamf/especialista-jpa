@@ -10,6 +10,23 @@ import java.math.BigDecimal;
 public class OperacoesComTransacoesTest extends EntityManagerTest {
 
     @Test
+    public void impedirOperacaoComBancoDeDados() {
+        Produto produto = entityManager.find(Produto.class, 1);
+
+        entityManager.detach(produto); // desvincula o objeto produto do Entity Manager, operações com ele não surtirão efeito
+
+        entityManager.getTransaction().begin();
+        produto.setNome("Kindle Paperwhite 2ª Geração");
+        entityManager.getTransaction().commit();
+
+        entityManager.clear(); // precisa limpar a memória para fazer a asserção por que o objeto ainda estará na memória
+
+        Produto produtoVerificação = entityManager.find(Produto.class, 1);
+        Assertions.assertEquals("Kindle", produtoVerificação.getNome()); //verifica que não alterou o nome do objeto
+    }
+
+
+    @Test
     public void inserirObjetoPersistMerge(){
         Produto produtoPersist = new Produto();
 
