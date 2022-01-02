@@ -2,6 +2,8 @@ package com.algaworks.ecommerce.iniciandocomjpa;
 
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Cliente;
+import com.algaworks.ecommerce.model.Sexo;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +27,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 
     @Test
     public void cria() {
-        Cliente cliente = new Cliente(3, "Casimiro Cortez");
+        Cliente cliente = new Cliente(3, "Casimiro Cortez", Sexo.MASCULINO);
 
         entityManager.getTransaction().begin();
         entityManager.persist(cliente);
@@ -51,7 +53,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
         Assertions.assertEquals("Fernando Mascarenhas", clienteVerificacao.getNome());
 
 
-        Cliente outroCliente = new Cliente(2, "Marcos Risoto");
+        Cliente outroCliente = new Cliente(2, "Marcos Risoto", Sexo.MASCULINO);
 
         entityManager.getTransaction().begin();
         entityManager.merge(outroCliente);

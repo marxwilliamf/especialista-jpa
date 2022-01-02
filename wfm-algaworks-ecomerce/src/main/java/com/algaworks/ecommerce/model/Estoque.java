@@ -13,25 +13,25 @@ import lombok.Setter;
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="cliente")
-public class Cliente {
+public class Estoque {
 
     @Id
     @EqualsAndHashCode.Include
     private Integer id;
-    private String nome;
-    private Sexo sexo;
+    private Integer produtoId;
+    private Integer quantidade;
     
 
-    public Cliente() {} //pra funcionar com o JPA precisa ter um cosntrotor vazio
+    public Estoque() {} //pra funcionar com o JPA precisa ter um cosntrotor vazio
 
-    public Cliente(Integer id) {
+    public Estoque(Integer id) {
         this.id = id;
     }
 
-    public Cliente(Integer id, String nome, Sexo sexo) {
+    public Estoque(Integer id, String nome, Integer categoriaPaiId) {
         this.id = id;
         this.nome = nome;
-        this.sexo = sexo;
+        this.categoriaPaiId = categoriaPaiId;
     }
 
 }
