@@ -18,7 +18,9 @@ public class Cliente {
     @Id
     @EqualsAndHashCode.Include
     private Integer id;
+    
     private String nome;
+    
     private Sexo sexo;
     
 

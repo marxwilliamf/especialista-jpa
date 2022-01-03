@@ -1,5 +1,6 @@
 package com.algaworks.ecommerce.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,13 +13,16 @@ import lombok.Setter;
 @Setter
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name="cliente")
+@Table(name="categoria")
 public class Categoria {
 
     @Id
     @EqualsAndHashCode.Include
     private Integer id;
+    
     private String nome;
+    
+    @Column(name = "categoria_pai_id")
     private Integer categoriaPaiId;
     
 
