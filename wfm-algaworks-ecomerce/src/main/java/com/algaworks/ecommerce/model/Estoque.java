@@ -26,7 +26,7 @@ public class Estoque {
     private Integer quantidade;
     
 
-    public Estoque() {} //pra funcionar com o JPA precisa ter um cosntrotor vazio
+    public Estoque() {} //pra funcionar com o JPA precisa ter um cosntrutor vazio
 
     public Estoque(Integer id) {
         this.id = id;

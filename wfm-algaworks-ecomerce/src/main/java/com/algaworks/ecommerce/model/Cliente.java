@@ -1,6 +1,8 @@
 package com.algaworks.ecommerce.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -21,10 +23,11 @@ public class Cliente {
     
     private String nome;
     
+    @Enumerated(EnumType.STRING) // para guardar o nome da enumeração, caso contrario, por padrão é @Enumerated(EnumType.ORDINAL) 
     private Sexo sexo;
     
 
-    public Cliente() {} //pra funcionar com o JPA precisa ter um cosntrotor vazio
+    public Cliente() {} //pra funcionar com o JPA precisa ter um cosntrutor vazio
 
     public Cliente(Integer id) {
         this.id = id;
