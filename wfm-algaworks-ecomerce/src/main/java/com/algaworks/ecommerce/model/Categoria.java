@@ -16,13 +16,14 @@ import lombok.Setter;
 @Table(name="categoria")
 public class Categoria {
 
-    @Id
+
     @EqualsAndHashCode.Include
     private Integer id;
     
     private String nome;
     
-    @Column(name = "categoria_pai_id")
+    //Posso colocar a anotação dos atributos (@Column) nos metodos Get, 
+    //(Ou todas nos atributos Ou todas nos Gets, para funcionar)
     private Integer categoriaPaiId;
     
 
@@ -38,4 +39,33 @@ public class Categoria {
         this.categoriaPaiId = categoriaPaiId;
     }
 
+    //mesmo com o Lombok posso declarar os metodos explicitamente que inclusive eles terão precedêcia sobre os do Lombok
+    @Id
+    public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+    @Column(name = "categoria_pai_id")
+	public Integer getCategoriaPaiId() {
+		return categoriaPaiId;
+	}
+
+	public void setCategoriaPaiId(Integer categoriaPaiId) {
+		this.categoriaPaiId = categoriaPaiId;
+	}
+
+    
+    
 }
