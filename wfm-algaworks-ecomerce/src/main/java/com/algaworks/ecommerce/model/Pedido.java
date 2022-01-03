@@ -38,7 +38,7 @@ public class Pedido {
     
     
 
-    public Pedido() {} //pra funcionar com o JPA precisa ter um cosntrotor vazio
+    public Pedido() {} //pra funcionar com o JPA precisa ter um cosntrutor vazio
 
     public Pedido(Integer id) {
         this.id = id;

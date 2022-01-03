@@ -26,7 +26,7 @@ public class Categoria {
     private Integer categoriaPaiId;
     
 
-    public Categoria() {} //pra funcionar com o JPA precisa ter um cosntrotor vazio
+    public Categoria() {} //pra funcionar com o JPA precisa ter um cosntrutor vazio
 
     public Categoria(Integer id) {
         this.id = id;

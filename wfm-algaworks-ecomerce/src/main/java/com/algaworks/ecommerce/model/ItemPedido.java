@@ -35,7 +35,7 @@ public class ItemPedido {
     
     
 
-    public ItemPedido() {} //pra funcionar com o JPA precisa ter um cosntrotor vazio
+    public ItemPedido() {} //pra funcionar com o JPA precisa ter um cosntrutor vazio
 
     public ItemPedido(Integer id) {
         this.id = id;
