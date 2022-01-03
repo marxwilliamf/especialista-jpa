@@ -1,6 +1,8 @@
 package com.algaworks.ecommerce.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,6 +20,7 @@ import java.math.BigDecimal;
 public class Produto {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //usa a função auto incremento do banco de dados
     @EqualsAndHashCode.Include
     private Integer id;
     

@@ -14,8 +14,9 @@ public class PrimeiroCrudTest extends EntityManagerTest {
     @Test
     public void procura(){
 
-        Cliente cliente = new Cliente(1);
-
+//        Cliente cliente = new Cliente(1); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
+        Cliente cliente = new Cliente();
+        
         Cliente clienteVerificacao = entityManager.find(Cliente.class, 1);
 
         Assertions.assertNotNull(clienteVerificacao);
@@ -27,7 +28,8 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 
     @Test
     public void cria() {
-        Cliente cliente = new Cliente(3, "Casimiro Cortez", Sexo.MASCULINO);
+//        Cliente cliente = new Cliente(3, "Casimiro Cortez", Sexo.MASCULINO); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
+        Cliente cliente = new Cliente(null, "Casimiro Cortez", Sexo.MASCULINO);
 
         entityManager.getTransaction().begin();
         entityManager.persist(cliente);
@@ -53,7 +55,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
         Assertions.assertEquals("Fernando Mascarenhas", clienteVerificacao.getNome());
 
 
-        Cliente outroCliente = new Cliente(2, "Marcos Risoto", Sexo.MASCULINO);
+        Cliente outroCliente = new Cliente(2, "Marcos Risoto", Sexo.MASCULINO); //necessario o id para identificar o cliente a ser atualizado
 
         entityManager.getTransaction().begin();
         entityManager.merge(outroCliente);

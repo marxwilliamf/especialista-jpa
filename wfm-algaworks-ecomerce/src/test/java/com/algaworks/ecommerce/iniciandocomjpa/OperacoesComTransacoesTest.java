@@ -30,7 +30,7 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     public void inserirObjetoPersistMerge(){
         Produto produtoPersist = new Produto();
 
-        produtoPersist.setId(5);
+//        produtoPersist.setId(5); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
         produtoPersist.setNome("Smartphone One Plus");
         produtoPersist.setDescricao("O melhor processador");
         produtoPersist.setPreco(new BigDecimal(2000));
@@ -49,7 +49,7 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
         System.out.println(produtoVerificação.toString());
 
         Produto produtoMerge = new Produto();
-        produtoMerge.setId(6);
+//        produtoMerge.setId(6); //Comentado atributo id pois começamos a usar a estratégia IDENTITY //ele não da erro caso setado por que pode ser uma atualização mas no caso de inserção não respeita valor setado 
         produtoMerge.setNome("Notebook Dell");
         produtoMerge.setDescricao("O melhor da Categoria");
         produtoMerge.setPreco(new BigDecimal(7000));
@@ -70,7 +70,7 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     public void inserirObjetoComMerge(){
         Produto produto = new Produto();
 
-        produto.setId(4);
+        produto.setId(4); //necessario o id para identificar o cliente a ser atualizado
         produto.setNome("Microfone Rode Videmic");
         produto.setDescricao("A melhor qualidade de som.");
         produto.setPreco(new BigDecimal(1000));
@@ -110,18 +110,19 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     public void atualizaObjeto() {
         Produto produto = new Produto();
 
-        produto.setId(1);
+//        produto.setId(1); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
         produto.setNome("Kindle Paperwhite");
         produto.setDescricao("Conheça o novo Kindle"); //caso não descreva uma caracteristica ele substitui por vazio.
         produto.setPreco(new BigDecimal(599));
 
         entityManager.getTransaction().begin();
-        entityManager.merge(produto); //o merge faz uma cópia da instancia produto e essa cópia é que é gerenciada pelo entityManager
+        //necessario atribuir a consulta a produto para poder usar o getId() no find
+        produto = entityManager.merge(produto); //o merge faz uma cópia da instancia produto e essa cópia é que é gerenciada pelo entityManager
         entityManager.getTransaction().commit();
 
         entityManager.clear(); // precisa limpar a memória para fazer a asserção por que o objeto ainda estará na memória
 
-        Produto produtoVerificação = entityManager.find(Produto.class, 1);
+        Produto produtoVerificação = entityManager.find(Produto.class, produto.getId());
         Assertions.assertNotNull(produtoVerificação);
         Assertions.assertEquals("Kindle Paperwhite", produtoVerificação.getNome());
     }
@@ -155,13 +156,13 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     public void inserirOPrimeiroObjeto(){
         Produto produto = new Produto();
 
-        produto.setId(2);
+//        produto.setId(2); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
         produto.setNome("Canon");
         produto.setDescricao("A melhor definição para suas fotos.");
         produto.setPreco(new BigDecimal(5000));
 
         entityManager.getTransaction().begin();
-        entityManager.persist(produto);
+        entityManager.persist(produto); // não precisa atribuir o resultado do metodo ao objeto produto como no merge pois ele atualiza o próprio objeto gerenciado
         entityManager.getTransaction().commit();
 
         //o método find já estará com o objeto em memória não buscando no banco de dados caso não seja feita uma
@@ -182,7 +183,7 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     public void inserirOPrimeiroObjeto2(){
         Produto produto = new Produto();
 
-        produto.setId(2);
+//        produto.setId(2); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
         produto.setNome("Canon");
         produto.setDescricao("A melhor definição para suas fotos.");
         produto.setPreco(new BigDecimal(5000));
