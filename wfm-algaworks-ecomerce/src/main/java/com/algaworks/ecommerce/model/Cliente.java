@@ -1,11 +1,14 @@
 package com.algaworks.ecommerce.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -30,6 +33,9 @@ public class Cliente {
     
     @Enumerated(EnumType.STRING) // para guardar o nome da enumeração, caso contrario, por padrão é @Enumerated(EnumType.ORDINAL) 
     private Sexo sexo;
+    
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos;
     
 
     public Cliente() {} //pra funcionar com o JPA precisa ter um cosntrutor vazio

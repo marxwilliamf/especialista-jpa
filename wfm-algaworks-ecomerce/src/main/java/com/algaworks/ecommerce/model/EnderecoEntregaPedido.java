@@ -5,9 +5,11 @@ import javax.persistence.Embeddable;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 //Não precisa equals e hash code, por que é uma classe embeddable
 @Embeddable
 public class EnderecoEntregaPedido {

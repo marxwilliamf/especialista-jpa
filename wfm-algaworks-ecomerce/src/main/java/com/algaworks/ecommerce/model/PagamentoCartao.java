@@ -12,9 +12,11 @@ import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="pagamento_cartao")
