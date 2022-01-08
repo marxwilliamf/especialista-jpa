@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,8 +32,10 @@ public class NotaFiscal {
     private Integer id;
     
     @OneToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
+//    @JoinColumn(name = "pedido_id")
+    @JoinTable(name = "pedido_nota_fiscal", joinColumns = @JoinColumn(name = "nota_fiscal_id", unique = true), //resultado final igual JoinColumn porém com a criação de uma tabela "pedido_nota_fiscal" com as relações 
+    		inverseJoinColumns = @JoinColumn(name = "pedido_id", unique = true)) //teste é o mesmo que testou com @JoinColumn
+    private Pedido pedido; //note que JoinTable não precisa necessariamente ser para Listas
     
     private String xml;
     
