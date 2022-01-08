@@ -32,11 +32,13 @@ public class NotaFiscal {
     private Integer id;
     
     @OneToOne
-//    @JoinColumn(name = "pedido_id")
-    @JoinTable(name = "pedido_nota_fiscal", joinColumns = @JoinColumn(name = "nota_fiscal_id", unique = true), //resultado final igual JoinColumn porém com a criação de uma tabela "pedido_nota_fiscal" com as relações 
-    		inverseJoinColumns = @JoinColumn(name = "pedido_id", unique = true)) //teste é o mesmo que testou com @JoinColumn
-    private Pedido pedido; //note que JoinTable não precisa necessariamente ser para Listas
+    @JoinColumn(name = "pedido_id") //caso faça o teste com @JoinTable(name = "pedido_nota_fiscal" ... deletar essa tabela para não ocorer erro
+    private Pedido pedido;
     
+//    @JoinTable(name = "pedido_nota_fiscal", joinColumns = @JoinColumn(name = "nota_fiscal_id", unique = true), //resultado final igual JoinColumn porém com a criação de uma tabela "pedido_nota_fiscal" com as relações 
+//    		inverseJoinColumns = @JoinColumn(name = "pedido_id", unique = true)) //teste é o mesmo que testou com @JoinColumn
+//    private Pedido pedido; //note que JoinTable não precisa necessariamente ser para Listas
+//    
     private String xml;
     
     @Column(name = "data_emissao")

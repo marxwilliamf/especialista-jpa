@@ -49,7 +49,8 @@ public class Pedido {
     @Column(name = "data_conclusao")
     private LocalDateTime dataConclusao;
     
-    @OneToOne(mappedBy = "pedido") //a volta fica igual mesmo com @JoinTable no Owner para @OneToOne
+//    @OneToOne(mappedBy = "pedido") //a volta fica igual mesmo com @JoinTable no Owner para @OneToOne
+    @OneToOne(mappedBy = "pedido")
     private NotaFiscal notaFiscal;
     
     private BigDecimal total;
