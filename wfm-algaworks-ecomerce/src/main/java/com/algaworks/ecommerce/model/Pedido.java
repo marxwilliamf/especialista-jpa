@@ -9,6 +9,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,7 @@ public class Pedido {
     @JoinColumn(name = "cliente_id") //quem tem o @JoinColumn é o Owner
     private Cliente cliente;
     
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
     List<ItemPedido> itens;
     
     @Column(name = "data_pedido")
