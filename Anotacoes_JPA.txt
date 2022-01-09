@@ -1,0 +1,32 @@
+
+Anotações JPA
+
+EAGER E LAZY
+Eager busca tudo no mesmo acesso ao banco
+Lazy deixa pra acessar informações secundárias só quando necessário
+padrão para entidades gregadas é Eager
+padrão para listas e Lazy
+pode se mudar o padrãono mapeamento da relação
+ex.: @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
+	
+	
+Optional
+	
+@ManyToOne(optional = false)
+Sem optional o padrão é true, que significa opcional, neste caso a consulta fica com left outer join
+já com optional = false a consulta fica com inner join que é mais performatico que o outer	
+
+Pedido pedido = entityManager.find(Pedido.class, 1);
+o select de pedido com o relacionamento muitos pra um em cliente na entidade pedid o padão é com optional true, 
+neste caso o select fica com 
+left outer join
+	cliente cliente1_ 
+		on pedido0_.cliente_id=cliente1_.id 
+outer join é menos performático do que o inner join
+caso marcado com optional false o select fica com
+inner join
+	cliente cliente1_ 
+		on pedido0_.cliente_id=cliente1_.id 
+		
+		
+		

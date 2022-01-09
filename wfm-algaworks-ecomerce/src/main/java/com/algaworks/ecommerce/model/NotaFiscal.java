@@ -31,7 +31,7 @@ public class NotaFiscal {
     @EqualsAndHashCode.Include
     private Integer id;
     
-    @OneToOne
+    @OneToOne(optional = false)
     @JoinColumn(name = "pedido_id") //caso faça o teste com @JoinTable(name = "pedido_nota_fiscal" ... deletar essa tabela para não ocorer erro
     private Pedido pedido;
     

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -25,8 +27,9 @@ public class Estoque {
     @EqualsAndHashCode.Include
     private Integer id;
     
-    @Column(name = "produto_id")
-    private Integer produtoId;
+    @OneToOne(optional = false) // sempre que eu salvar um estoque eu quero salvar um mproduto, por isso optional false, sempre é necessário informar produto
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
     
     private Integer quantidade;
     

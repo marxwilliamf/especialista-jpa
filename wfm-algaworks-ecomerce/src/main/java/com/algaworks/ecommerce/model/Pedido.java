@@ -37,7 +37,7 @@ public class Pedido {
     @EqualsAndHashCode.Include
     private Integer id;
     
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "cliente_id") //quem tem o @JoinColumn é o Owner
     private Cliente cliente;
     
@@ -51,7 +51,7 @@ public class Pedido {
     private LocalDateTime dataConclusao;
     
 //    @OneToOne(mappedBy = "pedido") //a volta fica igual mesmo com @JoinTable no Owner para @OneToOne
-    @OneToOne(mappedBy = "pedido")
+    @OneToOne(mappedBy = "pedido") //nem sempre que eu tenho um pedido eu tenho a nota fiscal então optional fica true que é o padrão quando não é declarado
     private NotaFiscal notaFiscal;
     
     private BigDecimal total;
