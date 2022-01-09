@@ -25,13 +25,14 @@ public class MapeamentoObjetoEmbutido extends EntityManagerTest{
 		endereco.setCidade("Guarulhos");
 		endereco.setEstado("SP");
 		
-		
+		Cliente cliente = entityManager.find(Cliente.class, 1);
 //		Pedido pedido = new Pedido(1); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
 		Pedido pedido = new Pedido(); 
 		pedido.setDataPedido(LocalDateTime.now());
 		pedido.setStatus(StatusPedido.AGUARDANDO);
 		pedido.setTotal(new BigDecimal(1000));
 		pedido.setEnderecoEntrega(endereco);
+		pedido.setCliente(cliente); //como o optional do relacionamento é false precisa setar cliente em pedido
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(pedido);
