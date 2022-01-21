@@ -43,7 +43,7 @@ public class RelacionamentoOneToOneTest extends EntityManagerTest {
 		Assertions.assertEquals("1234", pagamentoCartao.getNumero());
 
 		System.out.println("----------------------------------------------------------");
-		System.out.println("Pedido id: " + pedidoVerificacao.getId() + " data: " + pedidoVerificacao.getDataPedido());
+		System.out.println("Pedido id: " + pedidoVerificacao.getId() + " data: " + pedidoVerificacao.getDataCriacao());
 		for (ItemPedido itemPedido : pedidoVerificacao.getItens()) {
 			System.out.println("Produto: " + itemPedido.getProduto().getNome() + "\tQuant X Valor: "
 					+ itemPedido.getQuantidade() + " x " + itemPedido.getProduto().getPreco());

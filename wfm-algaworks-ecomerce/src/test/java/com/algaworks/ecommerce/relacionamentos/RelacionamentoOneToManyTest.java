@@ -21,7 +21,7 @@ public class RelacionamentoOneToManyTest extends EntityManagerTest {
 		
 		Pedido pedido = new Pedido();
 		pedido.setStatus(StatusPedido.AGUARDANDO);
-		pedido.setDataPedido(LocalDateTime.now());
+		pedido.setDataCriacao(LocalDateTime.now());
 		pedido.setTotal(BigDecimal.TEN);
 		
 		pedido.setCliente(cliente);
@@ -35,7 +35,7 @@ public class RelacionamentoOneToManyTest extends EntityManagerTest {
 		Cliente clienteVerificacao = entityManager.find(Cliente.class, cliente.getId());
 		Assertions.assertFalse(clienteVerificacao.getPedidos().isEmpty());
 		
-		System.out.println(clienteVerificacao.getPedidos().get(0).getDataPedido().toString());
+		System.out.println(clienteVerificacao.getPedidos().get(0).getDataCriacao().toString());
 	}
 	
 	
@@ -47,7 +47,7 @@ public class RelacionamentoOneToManyTest extends EntityManagerTest {
 		
 		Pedido pedido = new Pedido();
 		pedido.setStatus(StatusPedido.AGUARDANDO);
-		pedido.setDataPedido(LocalDateTime.now());
+		pedido.setDataCriacao(LocalDateTime.now());
 		pedido.setTotal(new BigDecimal(1998));
 		
 		pedido.setCliente(cliente);
@@ -101,7 +101,7 @@ public class RelacionamentoOneToManyTest extends EntityManagerTest {
 		
 		Pedido pedido = new Pedido();
 		pedido.setStatus(StatusPedido.AGUARDANDO);
-		pedido.setDataPedido(LocalDateTime.now());
+		pedido.setDataCriacao(LocalDateTime.now());
 		pedido.setTotal(BigDecimal.TEN);
 		
 		pedido.setCliente(cliente);
