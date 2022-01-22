@@ -1,5 +1,6 @@
 package com.algaworks.ecommerce.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.algaworks.ecommerce.listener.GenericoListener;
@@ -19,6 +21,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -41,6 +44,12 @@ public class Produto {
     
     private BigDecimal preco;
     
+    @Column(name = "data_criacao", updatable = false) //padrão pra updatable é true, foi setado pra falso para não se alterar após a inserção
+    private LocalDateTime dataCriacao;
+
+    @Column(name = "data_ultima_atualizacao", insertable = false) //insertable false para não ser valorado na inserção
+    private LocalDateTime dataUltimaAtualizacao;
+    
     @ManyToMany
     @JoinTable(name = "produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), 
     inverseJoinColumns =  @JoinColumn(name = "categoria_id"))
@@ -49,4 +58,9 @@ public class Produto {
     @OneToOne(mappedBy = "produto") //nem sempre que salvar um produto vai precisar dos registros de estoque, optiona = true vem por padrão
     private Estoque estoque;
     
+    
+    @PreUpdate
+    public void aoAtualizar() {
+    	dataUltimaAtualizacao = LocalDateTime.now();
+    }
 }
