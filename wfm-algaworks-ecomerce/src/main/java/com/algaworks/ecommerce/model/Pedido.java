@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -26,6 +27,10 @@ import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.algaworks.ecommerce.listener.GenericoListener;
+import com.algaworks.ecommerce.listener.GerarNotaFiscalListener;
+import com.algaworks.ecommerce.service.NotaFiscalService;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +39,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@EntityListeners({GerarNotaFiscalListener.class, GenericoListener.class})
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="pedido")
@@ -79,6 +85,10 @@ public class Pedido {
 
     public Pedido(Integer id) {
         this.id = id;
+    }
+    
+    public boolean isPago() {
+    	return StatusPedido.PAGO.equals(status);
     }
 
 //  @PrePersist //pode ter duas anotações no mesmo metodo, porem não pode repetir uma anotação de callback
