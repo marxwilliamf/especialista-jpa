@@ -62,8 +62,9 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
 		entityManager.flush(); //precisa fazer o flush para que pedido tenha id pra setar em itemPedido //mais pra frente veremos uma anotação que substitui a declaração do flush
 		
 		ItemPedido itemPedido = new ItemPedido();
-		itemPedido.setPedidoId(pedido.getId());
-		itemPedido.setProdutoId(produto.getId());
+//		itemPedido.setPedidoId(pedido.getId()); //IdClass
+//		itemPedido.setProdutoId(produto.getId());
+		itemPedido.setId(new ItemPedidoId(pedido.getId(), produto.getId()));
 		itemPedido.setPrecoProduto(new BigDecimal(5000));
 		itemPedido.setQuantidade(1);
 		
@@ -97,8 +98,9 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
 		entityManager.flush(); //precisa fazer o flush para que pedido tenha id pra setar em itemPedido //mais pra frente veremos uma anotação que substitui a declaração do flush
 		
 		ItemPedido itemPedido = new ItemPedido();
-		itemPedido.setPedidoId(pedido.getId());
-		itemPedido.setProdutoId(produto.getId());
+//		itemPedido.setPedidoId(pedido.getId()); //IdClass
+//		itemPedido.setProdutoId(produto.getId());
+		itemPedido.setId(new ItemPedidoId(pedido.getId(), produto.getId()));
 		itemPedido.setPrecoProduto(new BigDecimal(499));
 		itemPedido.setQuantidade(1);
 		

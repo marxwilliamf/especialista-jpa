@@ -3,6 +3,7 @@ package com.algaworks.ecommerce.model;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,27 +22,14 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@IdClass(ItemPedidoId.class) //necessario por causa da chave composta //a falta desta anotação e serializable em ItemPedidoId geram um erro parecido
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="item_pedido")
 public class ItemPedido {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY) //usa a função auto incremento do banco de dados
-//    @EqualsAndHashCode.Include
-//    private Integer id;
-    
-	@EqualsAndHashCode.Include
-	@Id
-	@Column(name = "pedido_id")
-	private Integer pedidoId;
-	    
-    @EqualsAndHashCode.Include
-    @Id
-    @Column(name = "produto_id")
-    private Integer  produtoId;
-
-
+	@EmbeddedId
+	private ItemPedidoId id; //os nomes das PK da tabela vem do JPA da classe embutida
+	
+	
     @ManyToOne(optional = false)
     @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
     private Pedido pedido;

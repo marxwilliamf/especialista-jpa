@@ -32,8 +32,9 @@ public class ChaveCompostaTest extends EntityManagerTest {
 		
 		entityManager.flush(); //precisa fazer o flush para que pedido tenha id pra setar em itemPedido //mais pra frente veremos uma anotação que substitui a declaração do flush		
 		ItemPedido itemPedido = new ItemPedido();
-		itemPedido.setPedidoId(pedido.getId()); //como foi feito o flush está setado
-		itemPedido.setProdutoId(produto.getId());
+//		itemPedido.setPedidoId(pedido.getId()); //IdClass //como foi feito o flush está setado
+//		itemPedido.setProdutoId(produto.getId());
+		itemPedido.setId(new ItemPedidoId(pedido.getId(), produto.getId()));
 		itemPedido.setPedido(pedido);
 		itemPedido.setProduto(produto);
 		itemPedido.setPrecoProduto(produto.getPreco());
