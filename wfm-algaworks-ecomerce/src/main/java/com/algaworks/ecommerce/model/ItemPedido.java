@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -29,13 +30,14 @@ public class ItemPedido {
 	@EmbeddedId
 	private ItemPedidoId id; //os nomes das PK da tabela vem do JPA da classe embutida
 	
-	
+	@MapsId("pedidoId")
     @ManyToOne(optional = false)
-    @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
+    @JoinColumn(name = "pedido_id") //com o MapsId eu posso tira insertable = false, updatable = false
     private Pedido pedido;
     
+	@MapsId("produtoId")
     @ManyToOne(optional = false)
-    @JoinColumn(name = "produto_id", insertable = false, updatable = false)
+    @JoinColumn(name = "produto_id")
     private Produto produto;
     
     @Column(name = "preco_produto")

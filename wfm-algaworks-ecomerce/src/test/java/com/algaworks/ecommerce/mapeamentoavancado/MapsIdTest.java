@@ -24,7 +24,7 @@ public class MapsIdTest extends EntityManagerTest{
 		Pedido pedido = entityManager.find(Pedido.class, 1);
 
 		NotaFiscal notaFiscal = new NotaFiscal();
-		notaFiscal.setId(pedido.getId()); //setando a PK que também é FK
+		//notaFiscal.setId(pedido.getId()); Agora com MapsId não precisa mais setar explicitamente //setando a PK que também é FK
 		notaFiscal.setPedido(pedido);
 		notaFiscal.setDataEmissao(new Date());
 		notaFiscal.setXml("<xml/>");		
@@ -41,4 +41,36 @@ public class MapsIdTest extends EntityManagerTest{
 		Assertions.assertEquals(pedido.getId(), notaFiscalVerificacao.getId());		
 	}
 	
+	@Test
+	public void inserirItemPedido() {
+		Cliente cliente = entityManager.find(Cliente.class, 1);
+		Produto produto = entityManager.find(Produto.class, 1);
+		
+		Pedido pedido = new Pedido();
+		
+		pedido.setCliente(cliente);
+		pedido.setDataCriacao(LocalDateTime.now());
+		pedido.setStatus(StatusPedido.AGUARDANDO);
+		pedido.setTotal(produto.getPreco());
+						
+		ItemPedido itemPedido = new ItemPedido();
+		itemPedido.setId(new ItemPedidoId()); //com MapsIs não precisa mais setar assim new ItemPedidoId(1,1)
+		itemPedido.setPedido(pedido);
+		itemPedido.setProduto(produto);
+		itemPedido.setPrecoProduto(new BigDecimal(499));
+		itemPedido.setQuantidade(1);
+		
+
+		entityManager.getTransaction().begin();
+		entityManager.persist(pedido);
+		entityManager.persist(itemPedido);
+		entityManager.getTransaction().commit();
+		
+		entityManager.clear();
+		
+		ItemPedido itemPedidoVerificacao = entityManager.find(ItemPedido.class, new ItemPedidoId(pedido.getId(), produto.getId()));
+		Assertions.assertNotNull(itemPedidoVerificacao.getPedido());
+		
+		System.out.println(itemPedidoVerificacao.getPedido().getDataCriacao().toString());
+	}
 }
