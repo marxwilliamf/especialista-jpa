@@ -26,19 +26,16 @@ import java.util.Date;
 @Table(name="nota_fiscal")
 public class NotaFiscal {
 
+    //Pk agora é a mesma de FK //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //usa a função auto incremento do banco de dados
     @EqualsAndHashCode.Include
+    @Column(name = "pedido_id")
     private Integer id;
     
     @OneToOne(optional = false)
-    @JoinColumn(name = "pedido_id") //caso faça o teste com @JoinTable(name = "pedido_nota_fiscal" ... deletar essa tabela para não ocorer erro
+    @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
     private Pedido pedido;
     
-//    @JoinTable(name = "pedido_nota_fiscal", joinColumns = @JoinColumn(name = "nota_fiscal_id", unique = true), //resultado final igual JoinColumn porém com a criação de uma tabela "pedido_nota_fiscal" com as relações 
-//    		inverseJoinColumns = @JoinColumn(name = "pedido_id", unique = true)) //teste é o mesmo que testou com @JoinColumn
-//    private Pedido pedido; //note que JoinTable não precisa necessariamente ser para Listas
-//    
     private String xml;
     
     @Column(name = "data_emissao")
