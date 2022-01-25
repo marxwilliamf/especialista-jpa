@@ -17,7 +17,7 @@ import com.algaworks.ecommerce.model.Pedido;
 import com.algaworks.ecommerce.model.Produto;
 import com.algaworks.ecommerce.model.StatusPagamento;
 import com.algaworks.ecommerce.model.StatusPedido;
-import com.algaworks.ecommerce.util.LerNotaFiscal;
+import com.algaworks.ecommerce.util.Arquivos;
 import com.algaworks.ecommerce.model.NotaFiscal;
 
 public class RelacionamentoOneToOneTest extends EntityManagerTest {
@@ -58,7 +58,7 @@ public class RelacionamentoOneToOneTest extends EntityManagerTest {
 		Pedido pedido = entityManager.find(Pedido.class, 1);
 
 		NotaFiscal notaFiscal = new NotaFiscal();
-		notaFiscal.setXml(LerNotaFiscal.carregarNotaFiscal());
+		notaFiscal.setXml(Arquivos.leArquivo("/nota-fiscal.xml"));
 		notaFiscal.setDataEmissao(new Date());
 		notaFiscal.setPedido(pedido);
 		

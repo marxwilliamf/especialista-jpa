@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
@@ -59,6 +60,9 @@ public class Produto {
     
     @OneToOne(mappedBy = "produto") //nem sempre que salvar um produto vai precisar dos registros de estoque, optiona = true vem por padrão
     private Estoque estoque;
+    
+    @Lob
+    private byte[] foto;
     
     @ElementCollection
     @CollectionTable(name = "produto_tag", joinColumns = @JoinColumn(name = "produto_id"))

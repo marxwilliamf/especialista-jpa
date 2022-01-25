@@ -15,7 +15,7 @@ import com.algaworks.ecommerce.model.NotaFiscal;
 import com.algaworks.ecommerce.model.Pedido;
 import com.algaworks.ecommerce.model.Produto;
 import com.algaworks.ecommerce.model.StatusPedido;
-import com.algaworks.ecommerce.util.LerNotaFiscal;
+import com.algaworks.ecommerce.util.Arquivos;
 
 public class MapsIdTest extends EntityManagerTest{
 
@@ -28,7 +28,7 @@ public class MapsIdTest extends EntityManagerTest{
 		//notaFiscal.setId(pedido.getId()); Agora com MapsId não precisa mais setar explicitamente //setando a PK que também é FK
 		notaFiscal.setPedido(pedido);
 		notaFiscal.setDataEmissao(new Date());
-		notaFiscal.setXml(LerNotaFiscal.carregarNotaFiscal());		
+		notaFiscal.setXml(Arquivos.leArquivo("/nota-fiscal.xml"));		
 		
 
 		entityManager.getTransaction().begin();

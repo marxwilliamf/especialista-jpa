@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.NotaFiscal;
 import com.algaworks.ecommerce.model.Pedido;
-import com.algaworks.ecommerce.util.LerNotaFiscal;
+import com.algaworks.ecommerce.model.Produto;
+import com.algaworks.ecommerce.util.Arquivos;
 
 public class SalvandoArquivosTest extends EntityManagerTest{
 
@@ -34,7 +35,7 @@ public class SalvandoArquivosTest extends EntityManagerTest{
 		Assertions.assertNotNull(notaFiscalVerificacao.getXml());
 		Assertions.assertTrue(notaFiscalVerificacao.getXml().length > 0);
 		
-		LerNotaFiscal.salvaArquivo(notaFiscalVerificacao.getXml());
+		Arquivos.salvaArquivo(notaFiscalVerificacao.getXml(), "/xml.xml");
 			
 		
 	}
@@ -46,4 +47,27 @@ public class SalvandoArquivosTest extends EntityManagerTest{
 			throw new RuntimeException(e);
 		}
 	}
+	
+	@Test
+	public void salvarFoto() {
+		
+		Produto produto = entityManager.find(Produto.class, 1);
+
+		
+
+		entityManager.getTransaction().begin();
+		produto.setFoto(Arquivos.leArquivo("/kindle.jpg"));
+		entityManager.getTransaction().commit();
+
+		entityManager.clear();
+
+		Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+		Assertions.assertNotNull(produtoVerificacao.getFoto());
+		Assertions.assertTrue(produtoVerificacao.getFoto().length > 0);
+		
+		Arquivos.salvaArquivo(produtoVerificacao.getFoto(), "/kindle.jpg");
+			
+		
+	}
+	
 }

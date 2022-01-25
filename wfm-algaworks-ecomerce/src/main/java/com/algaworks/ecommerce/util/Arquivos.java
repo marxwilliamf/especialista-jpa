@@ -6,19 +6,19 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class LerNotaFiscal {
+public class Arquivos {
 
-	public static byte[]  carregarNotaFiscal() {
+	public static byte[]  leArquivo(String nome) {
 		try {
-			return LerNotaFiscal.class.getResourceAsStream("/nota-fiscal.xml").readAllBytes();
+			return Arquivos.class.getResourceAsStream(nome).readAllBytes();
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
-	public static void salvaArquivo(byte[] arquivo) {
+	public static void salvaArquivo(byte[] arquivo, String nome) {
 		try {
-			OutputStream out = new FileOutputStream(Files.createFile(Paths.get(System.getProperty("user.home") + "/xml.xml")).toFile());
+			OutputStream out = new FileOutputStream(Files.createFile(Paths.get(System.getProperty("user.home") + nome)).toFile());
 			out.write(arquivo);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
