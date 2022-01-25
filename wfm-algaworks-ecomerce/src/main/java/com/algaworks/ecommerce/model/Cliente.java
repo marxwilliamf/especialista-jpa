@@ -9,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,6 +33,9 @@ public class Cliente {
     
     private String nome;
     
+    @Transient //não cria campo primeiro_nome na tabela ele é ignorado tanto pta salvar, buscar e atualizar, pois é um campo transiente, neste caso o prenchemos no callback @PostLoad
+    private String primeiroNome;
+    
     @Enumerated(EnumType.STRING) // para guardar o nome da enumeração, caso contrario, por padrão é @Enumerated(EnumType.ORDINAL) 
     private Sexo sexo;
     
@@ -48,6 +53,14 @@ public class Cliente {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
+    }
+    
+    @PostLoad
+    public void configurarPrimeiroNome() {
+    	if(nome != null && !nome.isBlank()) {
+    		int index = nome.indexOf(" ");
+    		primeiroNome = nome.substring(0, index);
+    	}
     }
 
 }
