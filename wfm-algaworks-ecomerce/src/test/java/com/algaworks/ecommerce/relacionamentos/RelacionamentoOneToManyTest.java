@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.ItemPedido;
+import com.algaworks.ecommerce.model.ItemPedidoId;
 import com.algaworks.ecommerce.model.Pedido;
 import com.algaworks.ecommerce.model.Produto;
 import com.algaworks.ecommerce.model.StatusPedido;
@@ -53,12 +54,14 @@ public class RelacionamentoOneToManyTest extends EntityManagerTest {
 		pedido.setCliente(cliente);
 				
 		ItemPedido itemPedido1 = new ItemPedido();
+		itemPedido1.setId(new ItemPedidoId()); //precisa setar por que é chave composta, não precisa colocar is indeices ex: (1,1) por causa do @MapsId, caso não for chave composta com @MapsId não precisa setar nada fica como se fosse IDENTITY
 		itemPedido1.setPedido(pedido);
 		itemPedido1.setProduto(produto1);
 		itemPedido1.setPrecoProduto(new BigDecimal(499));
 		itemPedido1.setQuantidade(1);
 
 		ItemPedido itemPedido2 = new ItemPedido();
+		itemPedido2.setId(new ItemPedidoId());;
 		itemPedido2.setPedido(pedido);
 		itemPedido2.setProduto(produto2);
 		itemPedido2.setPrecoProduto(new BigDecimal(1499));
@@ -107,6 +110,7 @@ public class RelacionamentoOneToManyTest extends EntityManagerTest {
 		pedido.setCliente(cliente);
 				
 		ItemPedido itemPedido = new ItemPedido();
+		itemPedido.setId(new ItemPedidoId());
 		itemPedido.setPrecoProduto(produto.getPreco());
 		itemPedido.setQuantidade(1);
 		itemPedido.setPedido(pedido);

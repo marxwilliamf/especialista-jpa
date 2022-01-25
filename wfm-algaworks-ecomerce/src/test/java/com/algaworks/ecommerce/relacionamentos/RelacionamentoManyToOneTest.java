@@ -56,18 +56,18 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
 		produto.setDescricao("Alta Performance");
 		produto.setPreco(new BigDecimal(5000));
 		
-		entityManager.getTransaction().begin();
-		entityManager.persist(pedido);
-		entityManager.persist(produto);
-		entityManager.flush(); //precisa fazer o flush para que pedido tenha id pra setar em itemPedido //mais pra frente veremos uma anotação que substitui a declaração do flush
-		
 		ItemPedido itemPedido = new ItemPedido();
 //		itemPedido.setPedidoId(pedido.getId()); //IdClass
 //		itemPedido.setProdutoId(produto.getId());
-		itemPedido.setId(new ItemPedidoId(pedido.getId(), produto.getId()));
+		itemPedido.setPedido(pedido); //IdClass
+		itemPedido.setProduto(produto);
+		itemPedido.setId(new ItemPedidoId()); //com MapsId não precisa maios faze isso new ItemPedidoId(pedido.getId(), produto.getId())
 		itemPedido.setPrecoProduto(new BigDecimal(5000));
 		itemPedido.setQuantidade(1);
 		
+		entityManager.getTransaction().begin(); //com MapsId posso persisit todos juntos sem precisar de flush
+		entityManager.persist(pedido);
+		entityManager.persist(produto);
 		entityManager.persist(itemPedido);
 		entityManager.getTransaction().commit();
 		
@@ -91,20 +91,18 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
 		pedido.setTotal(new BigDecimal(499));
 		
 		pedido.setCliente(cliente);
-				
-		entityManager.getTransaction().begin();
-		entityManager.persist(pedido);
-		
-		entityManager.flush(); //precisa fazer o flush para que pedido tenha id pra setar em itemPedido //mais pra frente veremos uma anotação que substitui a declaração do flush
 		
 		ItemPedido itemPedido = new ItemPedido();
 //		itemPedido.setPedidoId(pedido.getId()); //IdClass
 //		itemPedido.setProdutoId(produto.getId());
-		itemPedido.setId(new ItemPedidoId(pedido.getId(), produto.getId()));
+		itemPedido.setPedido(pedido); //IdClass
+		itemPedido.setProduto(produto);
+		itemPedido.setId(new ItemPedidoId());
 		itemPedido.setPrecoProduto(new BigDecimal(499));
 		itemPedido.setQuantidade(1);
 		
-
+		entityManager.getTransaction().begin();
+		entityManager.persist(pedido);
 		entityManager.persist(itemPedido);
 		entityManager.getTransaction().commit();
 		

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,10 +26,11 @@ import lombok.ToString;
 public class PagamentoCartao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //usa a função auto incremento do banco de dados
     @EqualsAndHashCode.Include
+    @Column(name = "pedido_id")
     private Integer id;
     
+	@MapsId
     @OneToOne(optional = false)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
