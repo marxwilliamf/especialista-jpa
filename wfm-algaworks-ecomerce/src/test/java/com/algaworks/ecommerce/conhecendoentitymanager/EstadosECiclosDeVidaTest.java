@@ -1,12 +1,8 @@
 package com.algaworks.ecommerce.conhecendoentitymanager;
 
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-
 import org.junit.jupiter.api.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
-import com.algaworks.ecommerce.model.Pedido;
 
 public class EstadosECiclosDeVidaTest extends EntityManagerTest {
 

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -20,6 +19,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ItemPedidoId implements Serializable { //precisa implementasr serializable para fazer chave composta
 	
+	private static final long serialVersionUID = 1L;
+
 	@EqualsAndHashCode.Include
 	@Column(name = "pedido_id") //agora com as anotações do JPA
 	private Integer pedidoId;

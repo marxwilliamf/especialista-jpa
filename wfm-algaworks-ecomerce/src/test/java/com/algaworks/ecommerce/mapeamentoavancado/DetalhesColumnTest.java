@@ -8,9 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
-import com.algaworks.ecommerce.model.Pedido;
 import com.algaworks.ecommerce.model.Produto;
-import com.algaworks.ecommerce.model.StatusPedido;
 
 public class DetalhesColumnTest extends EntityManagerTest{
 
@@ -44,8 +42,6 @@ public class DetalhesColumnTest extends EntityManagerTest{
 		produto.setPreco(new BigDecimal(499));
 		produto.setDataUltimaAtualizacao(LocalDateTime.now());
 		entityManager.getTransaction().commit();
-		
-		String seconds = new String(produto.getDataUltimaAtualizacao().truncatedTo(ChronoUnit.SECONDS).toString());
 		
 		entityManager.clear();
 		

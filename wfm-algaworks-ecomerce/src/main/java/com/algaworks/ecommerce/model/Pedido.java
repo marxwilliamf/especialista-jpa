@@ -11,9 +11,6 @@ import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -27,12 +24,9 @@ import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import com.algaworks.ecommerce.model.NotaFiscal;
 import com.algaworks.ecommerce.listener.GenericoListener;
 import com.algaworks.ecommerce.listener.GerarNotaFiscalListener;
-import com.algaworks.ecommerce.service.NotaFiscalService;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,14 +36,8 @@ import lombok.ToString;
 @ToString
 @EntityListeners({GerarNotaFiscalListener.class, GenericoListener.class})
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="pedido")
-public class Pedido {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //usa a função auto incremento do banco de dados
-    @EqualsAndHashCode.Include
-    private Integer id;
+public class Pedido extends EntidadeBaseInteger{
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "cliente_id") //quem tem o @JoinColumn é o Owner

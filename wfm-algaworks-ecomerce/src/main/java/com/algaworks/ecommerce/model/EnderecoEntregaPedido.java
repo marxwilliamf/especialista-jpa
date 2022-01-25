@@ -1,6 +1,5 @@
 package com.algaworks.ecommerce.model;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.Getter;

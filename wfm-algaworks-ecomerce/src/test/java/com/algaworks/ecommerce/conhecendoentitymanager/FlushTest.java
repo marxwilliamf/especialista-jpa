@@ -1,6 +1,5 @@
 package com.algaworks.ecommerce.conhecendoentitymanager;
 
-import org.jboss.jandex.ThrowsTypeTarget;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

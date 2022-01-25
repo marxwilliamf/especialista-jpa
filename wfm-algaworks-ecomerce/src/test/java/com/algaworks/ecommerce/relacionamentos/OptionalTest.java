@@ -1,8 +1,5 @@
 package com.algaworks.ecommerce.relacionamentos;
 
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-
 import org.junit.jupiter.api.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;

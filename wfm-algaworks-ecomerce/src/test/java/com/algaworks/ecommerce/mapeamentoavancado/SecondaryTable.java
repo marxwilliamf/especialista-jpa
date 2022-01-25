@@ -1,7 +1,6 @@
 package com.algaworks.ecommerce.mapeamentoavancado;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

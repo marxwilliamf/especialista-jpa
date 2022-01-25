@@ -13,15 +13,12 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 
     @Test
     public void procura(){
-
-//        Cliente cliente = new Cliente(1); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
-        Cliente cliente = new Cliente();
         
-        Cliente clienteVerificacao = entityManager.find(Cliente.class, 1);
+        Cliente cliente = entityManager.find(Cliente.class, 1);
 
-        Assertions.assertNotNull(clienteVerificacao);
+        Assertions.assertNotNull(cliente);
 
-        System.out.println(clienteVerificacao.toString());
+        System.out.println(cliente.toString());
 
 
     }
