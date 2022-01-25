@@ -73,7 +73,7 @@ public class RelacionamentoOneToOneTest extends EntityManagerTest {
 		Assertions.assertNotNull(pedidoVerificacao.getNotaFiscal());
 
 		NotaFiscal notaFiscalVerificacao = entityManager.find(NotaFiscal.class, notaFiscal.getId());
-		Assertions.assertEquals("TESTE", notaFiscalVerificacao.getPedido().getNotaFiscal().getXml());
+		Assertions.assertNotNull(notaFiscalVerificacao.getPedido().getNotaFiscal().getXml());
 
 	}
 }

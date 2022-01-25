@@ -30,17 +30,11 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @EntityListeners({GenericoListener.class})
 @Entity
 @Table(name="produto")
-public class Produto {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //usa a função auto incremento do banco de dados
-    @EqualsAndHashCode.Include
-    private Integer id;
-    
+public class Produto extends EntidadeBaseInteger{
+	
     private String nome;
     
     private String descricao;

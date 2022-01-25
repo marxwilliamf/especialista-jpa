@@ -32,14 +32,8 @@ import lombok.ToString;
 @ToString
 @SecondaryTable(name = "cliente_detalhe", pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"))
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="cliente")
-public class Cliente {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //usa a função auto incremento do banco de dados
-    @EqualsAndHashCode.Include
-    private Integer id;
+public class Cliente extends EntidadeBaseInteger{
     
     private String nome;
     

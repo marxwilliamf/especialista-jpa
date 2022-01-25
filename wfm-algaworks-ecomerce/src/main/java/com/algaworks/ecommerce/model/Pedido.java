@@ -42,14 +42,8 @@ import lombok.ToString;
 @ToString
 @EntityListeners({GerarNotaFiscalListener.class, GenericoListener.class})
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="pedido")
-public class Pedido {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //usa a função auto incremento do banco de dados
-    @EqualsAndHashCode.Include
-    private Integer id;
+public class Pedido extends EntidadeBaseInteger{
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "cliente_id") //quem tem o @JoinColumn é o Owner

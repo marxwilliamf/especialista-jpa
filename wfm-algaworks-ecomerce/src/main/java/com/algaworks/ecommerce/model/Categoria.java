@@ -27,12 +27,7 @@ import lombok.ToString;
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="categoria")
-public class Categoria {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY) //usa a função auto incremento do banco de dados
-  @EqualsAndHashCode.Include
-  private Integer id;
+public class Categoria extends EntidadeBaseInteger{
     
     private String nome;     
     
