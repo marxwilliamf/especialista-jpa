@@ -1,6 +1,8 @@
 package com.algaworks.ecommerce.model;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -58,6 +60,10 @@ public class Produto {
     @OneToOne(mappedBy = "produto") //nem sempre que salvar um produto vai precisar dos registros de estoque, optiona = true vem por padrão
     private Estoque estoque;
     
+    @ElementCollection
+    @CollectionTable(name = "produto_tag", joinColumns = @JoinColumn(name = "produto_id"))
+    @Column(name = "tag")
+    private List<String> tags;
     
     @PreUpdate
     public void aoAtualizar() {
