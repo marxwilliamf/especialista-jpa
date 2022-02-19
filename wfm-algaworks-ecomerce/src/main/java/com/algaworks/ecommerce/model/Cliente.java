@@ -10,6 +10,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
@@ -18,6 +19,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,10 +28,15 @@ import lombok.Setter;
 @Setter
 @SecondaryTable(name = "cliente_detalhe", pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"))
 @Entity
-@Table(name="cliente")
-public class Cliente extends EntidadeBaseInteger{
-    
+@Table(name="cliente", // schema = "wfm-ecommerce" //schema e catalog não são levados em conta na hora de gerar o banco automáticamente
+	//, catalog = //catalogos diferentes G	EX: ORACLE só no persistence.xml não basta é necessario declarar na classe
+	uniqueConstraints = { @UniqueConstraint(name = "unq_cpf", columnNames = {"cpf"})}, // pode ser um "array" {} de Constraints, caso seja um só não precisa chaves, mas como exemplo pra ficar explícito
+	indexes = { @Index(name = "idx_nome", columnList = "nome") } ) //columnList = "nome, cpf") //coluna nome é escrita igual a como é tabela e ou em @column
+	public class Cliente extends EntidadeBaseInteger {
+	
     private String nome;
+    
+    private String cpf;
     
     @ElementCollection
     @CollectionTable(name = "cliente_contato", joinColumns = @JoinColumn(name = "cliente_id"))
