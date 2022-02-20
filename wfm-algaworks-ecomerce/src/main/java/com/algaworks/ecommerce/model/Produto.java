@@ -34,10 +34,17 @@ import lombok.ToString;
 		indexes = @Index(name = "idx_nome", columnList = "nome"))
 public class Produto extends EntidadeBaseInteger{
 	
+	@Column(length = 100, nullable = false, //varchar(100) not null 
+			unique = true //semelhante a uniqueConstraints de @Table só que não da pra definir os nomes nem ter mais de uma coluna
+			//, table = //usado para sencondary table
+			) 
     private String nome;
     
+	@Column(columnDefinition = "varchar(275) not null default 'descricao'")
     private String descricao;
     
+	
+	@Column(precision = 10, scale = 2) // ddl// preco decimal(19,2) //padrão
     private BigDecimal preco;
     
     @Column(name = "data_criacao", updatable = false) //padrão pra updatable é true, foi setado pra falso para não se alterar após a inserção

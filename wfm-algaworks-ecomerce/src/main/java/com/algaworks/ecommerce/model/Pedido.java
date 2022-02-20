@@ -59,8 +59,10 @@ public class Pedido extends EntidadeBaseInteger{
     @OneToOne(mappedBy = "pedido") //nem sempre que eu tenho um pedido eu tenho a nota fiscal então optional fica true que é o padrão quando não é declarado
     private NotaFiscal notaFiscal;
     
+    @Column(precision = 19, scale = 2, nullable = false)
     private BigDecimal total;
     
+    @Column(length = 30, nullable = false) //length somente para String
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
     

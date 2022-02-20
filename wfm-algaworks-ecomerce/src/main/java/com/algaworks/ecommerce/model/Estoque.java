@@ -1,5 +1,6 @@
 package com.algaworks.ecommerce.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -20,6 +21,8 @@ public class Estoque extends EntidadeBaseInteger{
     @JoinColumn(name = "produto_id")
     private Produto produto;
     
+    
+    @Column(columnDefinition = "int(11) not null") //esse ddl deve ser feito de acordo com o banco// neste caso int(11) é o padrão para inteiro no MySQL
     private Integer quantidade;
     
 
