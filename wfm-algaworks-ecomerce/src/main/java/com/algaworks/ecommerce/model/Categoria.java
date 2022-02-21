@@ -2,6 +2,7 @@ package com.algaworks.ecommerce.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -21,6 +22,7 @@ import lombok.Setter;
 		indexes = @Index(name = "idx_nome", columnList = "nome"))
 public class Categoria extends EntidadeBaseInteger{
     
+	@Column(length = 100, nullable = false) //varchar(100) not null
     private String nome;     
     
     @ManyToOne

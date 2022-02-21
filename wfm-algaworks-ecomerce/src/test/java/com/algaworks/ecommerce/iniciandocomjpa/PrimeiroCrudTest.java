@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 public class PrimeiroCrudTest extends EntityManagerTest {
 
-
-
     @Test
     public void procura(){
         
@@ -18,7 +16,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 
         Assertions.assertNotNull(cliente);
 
-        System.out.println(cliente.toString());
+        System.out.println(cliente.getNome());
 
 
     }
@@ -26,7 +24,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
     @Test
     public void cria() {
 //        Cliente cliente = new Cliente(3, "Casimiro Cortez", Sexo.MASCULINO); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
-        Cliente cliente = new Cliente(null, "Casimiro Cortez", Sexo.MASCULINO);
+        Cliente cliente = new Cliente("Casimiro Cortez", "000.000.000-05", Sexo.MASCULINO);
 
         entityManager.getTransaction().begin();
         entityManager.persist(cliente);
@@ -34,7 +32,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 
         entityManager.clear();
 
-        Cliente clienteVerificacao = entityManager.find(Cliente.class, 3);
+        Cliente clienteVerificacao = entityManager.find(Cliente.class, cliente.getId());
         Assertions.assertEquals("Casimiro Cortez", clienteVerificacao.getNome());
     }
 
@@ -52,7 +50,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
         Assertions.assertEquals("Fernando Mascarenhas", clienteVerificacao.getNome());
 
 
-        Cliente outroCliente = new Cliente(2, "Marcos Risoto", Sexo.MASCULINO); //necessario o id para identificar o cliente a ser atualizado
+        Cliente outroCliente = new Cliente(3, "Felipe Mariano", "000.000.000-03", Sexo.MASCULINO); //necessario o id para identificar o cliente a ser atualizado
 
         entityManager.getTransaction().begin();
         entityManager.merge(outroCliente);
@@ -60,14 +58,14 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 
         entityManager.clear();
 
-        Cliente outroClienteVerificacao = entityManager.find(Cliente.class, 2);
-        Assertions.assertEquals("Marcos Risoto", outroClienteVerificacao.getNome());
+        Cliente outroClienteVerificacao = entityManager.find(Cliente.class, outroCliente.getId());
+        Assertions.assertEquals("Felipe Mariano", outroClienteVerificacao.getNome());
 
     }
 
     @Test
     public void deleta() {
-        Cliente cliente = entityManager.find(Cliente.class, 1);
+        Cliente cliente = entityManager.find(Cliente.class, 2); //cliente de id 2 por que não tem nenhum pedido para esse cliente
 
         Assertions.assertNotNull(cliente);
 
@@ -77,7 +75,7 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 
         entityManager.clear();
 
-        Cliente clienteVerificacao = entityManager.find(Cliente.class, 1);
+        Cliente clienteVerificacao = entityManager.find(Cliente.class, cliente.getId());
         Assertions.assertNull(clienteVerificacao);
     }
 }

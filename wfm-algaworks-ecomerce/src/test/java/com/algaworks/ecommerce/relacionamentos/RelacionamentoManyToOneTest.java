@@ -55,6 +55,7 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
 		produto.setNome("Computador");
 		produto.setDescricao("Alta Performance");
 		produto.setPreco(new BigDecimal(5000));
+		produto.setDataCriacao(LocalDateTime.now());
 		
 		ItemPedido itemPedido = new ItemPedido();
 //		itemPedido.setPedidoId(pedido.getId()); //IdClass

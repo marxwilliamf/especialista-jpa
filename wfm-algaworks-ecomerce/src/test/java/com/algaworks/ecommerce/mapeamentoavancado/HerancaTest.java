@@ -10,6 +10,7 @@ import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.Pagamento;
 import com.algaworks.ecommerce.model.PagamentoCartao;
 import com.algaworks.ecommerce.model.Pedido;
+import com.algaworks.ecommerce.model.Sexo;
 import com.algaworks.ecommerce.model.StatusPagamento;
 
 public class HerancaTest extends EntityManagerTest {
@@ -18,6 +19,8 @@ public class HerancaTest extends EntityManagerTest {
 	public void salvarCliente() {
 		Cliente cliente = new Cliente();
 		cliente.setNome("Fernando Morais");
+		cliente.setSexo(Sexo.FEMININO);
+		cliente.setCpf("000.000.000-07");
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(cliente);

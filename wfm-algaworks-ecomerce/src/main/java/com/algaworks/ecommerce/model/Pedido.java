@@ -33,7 +33,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @EntityListeners({GerarNotaFiscalListener.class, GenericoListener.class})
 @Entity
 @Table(name="pedido")
@@ -46,7 +45,7 @@ public class Pedido extends EntidadeBaseInteger{
     @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
     List<ItemPedido> itens;
 
-    @Column(name = "data_criacao", updatable = false)
+    @Column(name = "data_criacao", updatable = false, nullable = false)
     private LocalDateTime dataCriacao;
 
     @Column(name = "data_ultima_atualizacao", insertable = false)
@@ -59,7 +58,8 @@ public class Pedido extends EntidadeBaseInteger{
     @OneToOne(mappedBy = "pedido") //nem sempre que eu tenho um pedido eu tenho a nota fiscal então optional fica true que é o padrão quando não é declarado
     private NotaFiscal notaFiscal;
     
-    @Column(precision = 19, scale = 2, nullable = false)
+    @Column(//precision = 19, scale = 2, //padrão 
+    		nullable = false)
     private BigDecimal total;
     
     @Column(length = 30, nullable = false) //length somente para String
@@ -70,7 +70,7 @@ public class Pedido extends EntidadeBaseInteger{
     private EnderecoEntregaPedido enderecoEntrega;
 
     @OneToOne(mappedBy = "pedido")
-    private PagamentoCartao pagamento;
+    private Pagamento pagamento;
     
     public Pedido() {} //pra funcionar com o JPA precisa ter um cosntrutor vazio
 
@@ -88,7 +88,6 @@ public class Pedido extends EntidadeBaseInteger{
   	if(itens != null) {
   		total = itens.stream().map(ItemPedido::getPrecoProduto)
   				.reduce(BigDecimal.ZERO, BigDecimal::add);
-//  		setTotal(total);
   	}
   }
 

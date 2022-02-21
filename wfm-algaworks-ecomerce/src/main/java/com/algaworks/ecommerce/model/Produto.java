@@ -40,15 +40,15 @@ public class Produto extends EntidadeBaseInteger{
 			) 
     private String nome;
     
-	@Column(columnDefinition = "varchar(275) not null default 'descricao'")
+	@Column(columnDefinition = "varchar(275) default 'descricao'")
     private String descricao;
     
 	
-	@Column(precision = 10, scale = 2) // ddl// preco decimal(19,2) //padrão
+	//@Column(precision = 19, scale = 2) // ddl// preco decimal(19,2) //padrão
     private BigDecimal preco;
     
-    @Column(name = "data_criacao", updatable = false) //padrão pra updatable é true, foi setado pra falso para não se alterar após a inserção
-    private LocalDateTime dataCriacao;
+    @Column(name = "data_criacao", updatable = false, nullable = false) //padrão pra updatable é true, foi setado pra falso para não se alterar após a inserção
+    private LocalDateTime dataCriacao; //datetime(6) not null
 
     @Column(name = "data_ultima_atualizacao", insertable = false) //insertable false para não ser valorado na inserção
     private LocalDateTime dataUltimaAtualizacao;
@@ -66,7 +66,7 @@ public class Produto extends EntidadeBaseInteger{
     
     @ElementCollection
     @CollectionTable(name = "produto_tag", joinColumns = @JoinColumn(name = "produto_id"))
-    @Column(name = "tag")
+    @Column(name = "tag", length = 50, nullable = false)
     private List<String> tags;
     
     

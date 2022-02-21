@@ -16,8 +16,8 @@ public class DetalhesColumnTest extends EntityManagerTest{
 	public void imperdirInsercaoDaColunaAtualizacao() {
 		Produto produto = new Produto();
 		produto.setNome("Teclado para Smartphone");
-		produto.setDescricao(null);
-		produto.setPreco(null);
+		produto.setDescricao("Velocidade na sua digitação.");
+		produto.setPreco(new BigDecimal(172));
 		produto.setDataCriacao(LocalDateTime.now());
 		produto.setDataUltimaAtualizacao(LocalDateTime.now());
 		

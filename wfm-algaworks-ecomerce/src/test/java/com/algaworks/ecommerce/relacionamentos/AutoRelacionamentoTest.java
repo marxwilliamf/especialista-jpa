@@ -11,10 +11,10 @@ public class AutoRelacionamentoTest extends EntityManagerTest {
 	@Test
 	public void verificarRelacionamento() { //exemplo professor
 		Categoria categoriaPai = new Categoria();
-		categoriaPai.setNome("Eletrônicos");
+		categoriaPai.setNome("Cosméticos");
 	
 		Categoria categoria = new Categoria();
-		categoria.setNome("Celulares");
+		categoria.setNome("Perfumes");
 		categoria.setCategoriaPai(categoriaPai);
 		
 		entityManager.getTransaction().begin();
@@ -32,10 +32,10 @@ public class AutoRelacionamentoTest extends EntityManagerTest {
 	
 	@Test
 	public void verificarRelacionamentoLista() { //exemplo professor
-		Categoria categoriaPai = new Categoria("Eletrônicos", null);
+		Categoria categoriaPai = new Categoria("Móveis", null);
 	
-		Categoria categoria1 = new Categoria("Celulares", categoriaPai);
-		Categoria categoria2 = new Categoria("Computadores", categoriaPai);
+		Categoria categoria1 = new Categoria("Cama", categoriaPai);
+		Categoria categoria2 = new Categoria("Guarda Roupas", categoriaPai);
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(categoriaPai);

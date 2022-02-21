@@ -1,5 +1,6 @@
 package com.algaworks.ecommerce.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.Setter;
 public class Atributo {
 	
 	//@Column(name = "atr_nome") // caso queira personalizar o nome
+	@Column(length = 100, nullable = false) //varrchar(100) not null
 	private String nome;
 	
 	private String valor;

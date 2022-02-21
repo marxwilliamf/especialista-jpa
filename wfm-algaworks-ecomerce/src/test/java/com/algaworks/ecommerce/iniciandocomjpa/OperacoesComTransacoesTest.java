@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class OperacoesComTransacoesTest extends EntityManagerTest {
 
@@ -29,7 +30,7 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     @Test
     public void inserirObjetoPersistMerge(){
         Produto produtoPersist = new Produto();
-
+        produtoPersist.setDataCriacao(LocalDateTime.now());
 //        produtoPersist.setId(5); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
         produtoPersist.setNome("Smartphone One Plus");
         produtoPersist.setDescricao("O melhor processador");
@@ -49,6 +50,7 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
         System.out.println(produtoVerificação.toString());
 
         Produto produtoMerge = new Produto();
+        produtoMerge.setDataCriacao(LocalDateTime.now());
 //        produtoMerge.setId(6); //Comentado atributo id pois começamos a usar a estratégia IDENTITY //ele não da erro caso setado por que pode ser uma atualização mas no caso de inserção não respeita valor setado 
         produtoMerge.setNome("Notebook Dell");
         produtoMerge.setDescricao("O melhor da Categoria");
@@ -69,7 +71,7 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     @Test
     public void inserirObjetoComMerge(){
         Produto produto = new Produto();
-
+        produto.setDataCriacao(LocalDateTime.now());
         produto.setId(4); //necessario o id para identificar o cliente a ser atualizado
         produto.setNome("Microfone Rode Videmic");
         produto.setDescricao("A melhor qualidade de som.");
@@ -109,7 +111,7 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     @Test
     public void atualizaObjeto() {
         Produto produto = new Produto();
-
+        produto.setDataCriacao(LocalDateTime.now());
 //        produto.setId(1); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
         produto.setNome("Kindle Paperwhite");
         produto.setDescricao("Conheça o novo Kindle"); //caso não descreva uma caracteristica ele substitui por vazio.
@@ -155,9 +157,8 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     @Test
     public void inserirOPrimeiroObjeto(){
         Produto produto = new Produto();
-
-//        produto.setId(2); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
-        produto.setNome("Canon");
+        produto.setDataCriacao(LocalDateTime.now());
+        produto.setNome("Canon2"); //precisa ter nomes diferentes pra esse campo por causa da constraint unique
         produto.setDescricao("A melhor definição para suas fotos.");
         produto.setPreco(new BigDecimal(5000));
 
@@ -182,7 +183,7 @@ public class OperacoesComTransacoesTest extends EntityManagerTest {
     @Test
     public void inserirOPrimeiroObjeto2(){
         Produto produto = new Produto();
-
+        produto.setDataCriacao(LocalDateTime.now());
 //        produto.setId(2); //Comentado atributo id pois começamos a usar a estratégia IDENTITY
         produto.setNome("Canon");
         produto.setDescricao("A melhor definição para suas fotos.");

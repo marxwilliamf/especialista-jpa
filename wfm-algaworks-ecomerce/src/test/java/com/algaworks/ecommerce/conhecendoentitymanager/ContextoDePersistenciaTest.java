@@ -1,6 +1,7 @@
 package com.algaworks.ecommerce.conhecendoentitymanager;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,16 +16,19 @@ public class ContextoDePersistenciaTest extends EntityManagerTest {
 		entityManager.getTransaction().begin();
 		
 		Produto produto = entityManager.find(Produto.class, 1);
+		produto.setDataCriacao(LocalDateTime.now());
 		produto.setPreco(new BigDecimal(100)); //dirtyChecking //setagem de um objeto gerenciado
 		
 		
 		Produto produto2 = new Produto();
+		produto2.setDataCriacao(LocalDateTime.now());
 		produto2.setNome("Caneca para Café"); //como não é um objeto gerenciado ainda não é dirtyChecking
 		produto2.setPreco(new BigDecimal(10));
 		produto2.setDescricao("Boa caneca para café");
 		entityManager.persist(produto2);
 
 		Produto produto3 = new Produto();
+		produto3.setDataCriacao(LocalDateTime.now());
 		produto3.setNome("Caneca para Chá"); //como não é um objeto gerenciado ainda não é dirtyChecking
 		produto3.setPreco(new BigDecimal(10));
 		produto3.setDescricao("Boa caneca para chá");

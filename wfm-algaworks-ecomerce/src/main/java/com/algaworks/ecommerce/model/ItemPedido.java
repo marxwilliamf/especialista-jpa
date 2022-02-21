@@ -36,9 +36,10 @@ public class ItemPedido {
     @JoinColumn(name = "produto_id")
     private Produto produto;
     
-    @Column(name = "preco_produto")
+    @Column(name = "preco_produto", nullable = false) //decimal(19, 2) not null //precisão e escala já são esses valores por padrão não precisa informar 
     private BigDecimal precoProduto;
     
-    private Integer quantidade;
+    @Column(nullable = false)
+    private Integer quantidade; //integer not null //integet int(11) padrão mysql 
 
 }

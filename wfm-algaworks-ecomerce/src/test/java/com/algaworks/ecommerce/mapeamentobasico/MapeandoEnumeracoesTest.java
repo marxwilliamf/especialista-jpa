@@ -11,7 +11,7 @@ public class MapeandoEnumeracoesTest extends EntityManagerTest {
 	
 	@Test
 	public void testarEnum() {
-		Cliente cliente = new Cliente("Jose Mineiro", Sexo.MASCULINO); //sem atributo id pois começamos a usar a estratégia IDENTITY
+		Cliente cliente = new Cliente("Jose Mineiro", "000.000.000-04",  Sexo.MASCULINO); //sem atributo id pois começamos a usar a estratégia IDENTITY
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(cliente);

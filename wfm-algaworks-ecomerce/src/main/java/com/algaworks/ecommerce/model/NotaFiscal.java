@@ -32,10 +32,11 @@ public class NotaFiscal extends EntidadeBaseInteger {
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
     
-    @Lob		
-    private byte[] xml;
+    @Lob
+    @Column(nullable = false)
+    private byte[] xml; //LongBlob not null //padrão LongBlob //
     
-    @Column(name = "data_emissao")
-    private Date dataEmissao;
+    @Column(name = "data_emissao", nullable = false)
+    private Date dataEmissao; //datetime(6) not null //padrao datetime(6)
     
 }

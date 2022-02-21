@@ -34,8 +34,10 @@ import lombok.Setter;
 	indexes = { @Index(name = "idx_nome", columnList = "nome") } ) //columnList = "nome, cpf") //coluna nome é escrita igual a como é tabela e ou em @column
 	public class Cliente extends EntidadeBaseInteger {
 	
+	@Column(length = 100, nullable = false) //varchar(100) not null
     private String nome;
     
+	@Column(length = 14, nullable = false) //varchar(100) not null
     private String cpf;
     
     @ElementCollection
@@ -47,7 +49,7 @@ import lombok.Setter;
     @Transient //não cria campo primeiro_nome na tabela ele é ignorado tanto pta salvar, buscar e atualizar, pois é um campo transiente, neste caso o prenchemos no callback @PostLoad
     private String primeiroNome;
     
-    @Column(table = "cliente_detalhe")
+    @Column(table = "cliente_detalhe", length = 30, nullable = false) //varchar(30) not null
     @Enumerated(EnumType.STRING) // para guardar o nome da enumeração, caso contrario, por padrão é @Enumerated(EnumType.ORDINAL) 
     private Sexo sexo;
     
@@ -63,8 +65,16 @@ import lombok.Setter;
         this.id = id;
     }
 
-    public Cliente(String nome, Sexo sexo) {
+    public Cliente(Integer id, String nome, String cpf, Sexo sexo) {
+    	this.id = id;
         this.nome = nome;
+        this.cpf = cpf;
+        this.sexo = sexo;
+    }
+    
+    public Cliente(String nome, String cpf, Sexo sexo) {
+        this.nome = nome;
+        this.cpf = cpf;
         this.sexo = sexo;
     }
     
