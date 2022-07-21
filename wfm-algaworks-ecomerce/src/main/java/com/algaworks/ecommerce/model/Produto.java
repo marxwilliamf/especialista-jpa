@@ -40,7 +40,9 @@ public class Produto extends EntidadeBaseInteger{
 			) 
     private String nome;
     
-	@Column(columnDefinition = "varchar(275) default 'descricao'")
+	//@Column(columnDefinition = "varchar(275) default 'descricao'")
+	//@Column(columnDefinition = "text") //mysql não pode ter valor por default 
+	@Lob // lontext
     private String descricao;
     
 	
