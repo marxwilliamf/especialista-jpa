@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ForeignKey;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -26,14 +27,16 @@ public class ItemPedido {
 	@EmbeddedId
 	private ItemPedidoId id; //os nomes das PK da tabela vem do JPA da classe embutida
 	
-	@MapsId("pedidoId")
+	@MapsId("pedidoId") //essa coluna será uma pk
     @ManyToOne(optional = false)
-    @JoinColumn(name = "pedido_id") //com o MapsId eu posso tira insertable = false, updatable = false
+    @JoinColumn(name = "pedido_id", nullable = false, //não precisaria nullable = false por causa do MapsId, mas pode-se deixar explicito caso queira 
+    foreignKey = @ForeignKey(name = "fk_item_pedido_pedido")) //com o MapsId eu posso tira insertable = false, updatable = false
     private Pedido pedido;
     
 	@MapsId("produtoId")
     @ManyToOne(optional = false)
-    @JoinColumn(name = "produto_id")
+    @JoinColumn(name = "produto_id", nullable = false,
+    foreignKey = @ForeignKey(name = "fk_item_pedido_produto"))
     private Produto produto;
     
     @Column(name = "preco_produto", nullable = false) //decimal(19, 2) not null //precisão e escala já são esses valores por padrão não precisa informar 

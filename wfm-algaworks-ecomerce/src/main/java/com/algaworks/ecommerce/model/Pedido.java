@@ -11,6 +11,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -29,7 +30,6 @@ import com.algaworks.ecommerce.listener.GerarNotaFiscalListener;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -38,8 +38,8 @@ import lombok.ToString;
 @Table(name="pedido")
 public class Pedido extends EntidadeBaseInteger{
     
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "cliente_id") //quem tem o @JoinColumn é o Owner
+    @ManyToOne(optional = false) //com o optional = false na hora de fazer o join ele usa join column e não left join column     //com optional = false, é bom o nullable estar como false também, pricipalmente se o banco for gerado por código 
+    @JoinColumn(name = "cliente_id", nullable = false, foreignKey = @ForeignKey(name = "fk_pedido_cliente")) //quem tem o @JoinColumn é o Owner //
     private Cliente cliente;
     
     @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
