@@ -3,7 +3,7 @@ insert into produto(id, nome, preco, data_criacao, descricao) values(3, "Câmera
 
 insert into cliente(id, nome, cpf) values(1, 'Fernando Medeiros', '000.000.000-01');
 insert into cliente(id, nome, cpf) values(2, 'Marcos Mariano', '000.000.000-02');
-insert into cliente(id, nome, cpf) values(3, 'Mathes Mariano', '000.000.000-03');
+insert into cliente(id, nome, cpf) values(3, 'Matheus Mariano', '000.000.000-03');
 
 insert into cliente_detalhe(cliente_id, sexo, data_nascimento) values(1, 'MASCULINO', date_sub(sysdate(), interval 27 year));
 insert into cliente_detalhe(cliente_id, sexo, data_nascimento) values(2, 'MASCULINO', date_sub(sysdate(), interval 30 year));
